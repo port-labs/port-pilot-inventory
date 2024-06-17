@@ -1,0 +1,23 @@
+{
+    "identifier": "ruleResultUpdated",
+    "title": "Rule result updated",
+    "trigger": {
+      "type": "automation",
+      "event": {
+        "type": "ENTITY_UPDATED",
+        "blueprintIdentifier": "_rule_result"
+      }
+    },
+    "invocationMethod": {
+      "type": "GITHUB",
+      "org": "github-org-name",
+      "repo": "github-repo-name",
+      "workflow": "notify-rule-result-updated.yaml",
+      "workflowInputs": {
+        "rule_result_name": "{{ .event.context.entityIdentifier }}",
+        "entity_link": "{{ .event.after.properties.entity_link }}"
+      },
+      "reportWorkflowStatus": true
+    },
+    "publish": true
+  }

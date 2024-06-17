@@ -1,0 +1,31 @@
+{
+  "identifier": "ruleResultDegraded",
+  "title": "Rule result degraded",
+  "trigger": {
+    "type": "automation",
+    "event": {
+      "type": "ENTITY_UPDATED",
+      "blueprintIdentifier": "_rule_result"
+    },
+    "condition": {
+      "type": "JQ",
+      "expressions": [
+        ".diff.before.properties.passed == \"Passed\"",
+        ".diff.after.properties.passed == \"Not passed\""
+      ],
+      "combinator": "and"
+    }
+  },
+  "invocationMethod": {
+    "type": "GITHUB",
+    "org": "github-org-name",
+    "repo": "github-repo-name",
+    "workflow": "create-issue-on-rule-degradation.yaml",
+    "workflowInputs": {
+      "rule_result_name": "{{ .event.context.entityIdentifier }}",
+      "entity_link": "{{ .event.after.properties.entity_link }}"
+    },
+    "reportWorkflowStatus": true
+  },
+  "publish": true
+}
