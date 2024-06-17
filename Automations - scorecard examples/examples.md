@@ -43,7 +43,7 @@ The following configuration will cause a message to be sent whenever a scorecard
 
 The `notify-rule-result-updated.yaml` workflow will contain the logic to send a Slack/Teams message.
 
-:::info Prerequisite - set up webhooks
+#### Prerequisite - set up webhooks
 The workflow requires a Slack webhook URL and/or a Microsoft Teams webhook URL to send the message.  
 
 **Slack**:
@@ -53,7 +53,8 @@ The workflow requires a Slack webhook URL and/or a Microsoft Teams webhook URL t
 **Microsoft Teams**:
 1. To set up a Microsoft Teams webhook, follow the instructions [here](https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook).
 2. Once you have the webhook URL, add it as a secret in your GitHub repository named `TEAMS_WEBHOOK_URL`.
-:::
+
+#### GitHub workflow
 
 ```yaml showLineNumbers title="notify-rule-result-updated.yaml"
 name: Notify when rule result is updated
