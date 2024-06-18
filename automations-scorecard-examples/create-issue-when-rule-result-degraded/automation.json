@@ -23,7 +23,7 @@
     "workflow": "create-issue-on-rule-degradation.yaml",
     "workflowInputs": {
       "rule_result_name": "{{ .event.context.entityIdentifier }}",
-      "entity_link": "{{ .event.after.properties.entity_link }}"
+      "entity_link": "{{ .event.diff.after.properties.entity_link }}"
     },
     "reportWorkflowStatus": true
   },
