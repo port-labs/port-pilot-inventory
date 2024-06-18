@@ -1,0 +1,47 @@
+name: Create issue when rule is degraded
+
+on:
+  workflow_dispatch:
+    inputs:
+      # Note that the inputs are the same as the payload (workflowInputs) defined in the automation
+      rule_result_name:
+        description: 'The rule result name'
+        required: true
+        type: string
+      entity_link:
+        description: 'A link to the evaluated entity'
+        required: true
+        type: string
+      runId:
+        description: "The run's unique id"
+        required: true
+        type: string
+
+jobs:
+  send_message:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: create an issue
+      id: create
+      uses: dacbd/create-issue-action@main
+      with:
+        token: ${{ github.token }}
+        # By default, the issue will be created in the same repository as the workflow
+        repo: ${{ github.context.repo.repo}}
+        title: "Automation issue - degraded rule result: ${{ inputs.rule_result_name }}"
+        body: |
+          This task was created by a Port automation, due to the degradation of rule result ${{ inputs.rule_result_name }}. See evaluated entity: ${{ inputs.entity_link }}.
+    
+    - name: Log issue creation
+      uses: port-labs/port-github-action@v1
+      with:
+        clientId: ${{ secrets.PORT_CLIENT_ID }}
+        clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
+        operation: PATCH_RUN
+        link: ${{ steps.create.outputs.html_url }}
+        runId: ${{ inputs.runId }}
+        logMessage: |
+           GitHub issue created! ✅
+           
+           Issue link: ${{ steps.create.outputs.html_url }}
