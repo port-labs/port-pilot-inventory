@@ -10,8 +10,8 @@
     "condition": {
       "type": "JQ",
       "expressions": [
-        ".diff.before.properties.passed == \"Passed\"",
-        ".diff.after.properties.passed == \"Not passed\""
+        ".diff.before.properties.result == \"Passed\"",
+        ".diff.after.properties.result == \"Not passed\""
       ],
       "combinator": "and"
     }
@@ -22,6 +22,7 @@
     "repo": "github-repo-name",
     "workflow": "create-jira-issue-on-rule-degradation.yaml",
     "workflowInputs": {
+      "rule_result": "{{ .event.diff.after }}",
       "rule_result_name": "{{ .event.context.entityIdentifier }}",
       "entity_link": "{{ .event.diff.after.properties.entity_link }}",
       "runId": "{{ .run.id }}"

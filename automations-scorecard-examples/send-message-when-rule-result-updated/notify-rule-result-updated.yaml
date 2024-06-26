@@ -5,11 +5,11 @@ on:
     inputs:
       # Note that the inputs are the same as the payload (workflowInputs) defined in the automation
       rule_result_name:
-        description: 'The rule result's name'
+        description: "The rule result's name"
         required: true
         type: string
       entity_link:
-        description: 'A link to the evaluated entity'
+        description: "A link to the evaluated entity"
         required: true
         type: string
 

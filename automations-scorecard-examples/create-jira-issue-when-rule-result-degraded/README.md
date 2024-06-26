@@ -12,6 +12,3 @@ In your GitHub repository, go to `Settings`>`Secrets` and add the following secr
 - `PORT_CLIENT_ID` - Your port [client id](https://docs.getport.io/build-your-software-catalog/custom-integration/api/#find-your-port-credentials)
 - `PORT_CLIENT_SECRET` - Your port [client secret](https://docs.getport.io/build-your-software-catalog/custom-integration/api/#find-your-port-credentials)
 
-#### Jira project key
-
-Make sure to replace `<YOUR-PROJECT-KEY>` in the GitHub workflow with your [Jira project key](https://confluence.atlassian.com/adminjiraserver/defining-a-project-938847066.html)

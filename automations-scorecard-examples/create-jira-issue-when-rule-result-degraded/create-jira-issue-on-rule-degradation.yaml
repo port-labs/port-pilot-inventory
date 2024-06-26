@@ -3,6 +3,10 @@ name: Create issue when rule is degraded
 on:
   workflow_dispatch:
     inputs:
+      rule_result:
+        description: 'The rule reesult entity'
+        required: true
+        type: string
       rule_result_name:
         description: 'The rule result name'
         required: true
@@ -31,7 +35,7 @@ jobs:
       id: create
       uses: atlassian/gajira-create@v3
       with:
-        project: <YOUR-PROJECT-KEY>
+        project: ${{ fromJson(inputs.rule_result).relations.jiraProject }}
         issuetype: Task
         summary:  "Automation task - degraded rule result: ${{ inputs.rule_result_name }}"
         description: |
